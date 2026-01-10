@@ -2,14 +2,19 @@ package com.maybank.cards.controller;
 
 import java.util.Objects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maybank.cards.dto.CardHolderResponseDto;
 import com.maybank.cards.dto.CreateCardRequestDto;
 import com.maybank.cards.dto.CreateCardResponseDto;
 import com.maybank.cards.dto.FetchCardDetailsRequestDto;
@@ -30,6 +35,9 @@ public class CardController {
 	@Autowired
 	CardService cardService;
 
+	private static final Logger logger =
+	        LogManager.getLogger(CardController.class);
+	
 	//Create Card for a new user
 	@PostMapping(value = "/create-card")
 	public CreateCardResponseDto createCard(@RequestBody CreateCardRequestDto createCardRequest){
@@ -48,7 +56,7 @@ public class CardController {
 	public FetchCardDetailsResponseDto fetchCardDetails(@RequestBody FetchCardDetailsRequestDto fetchCardDetailsRequestDto) {
 		FetchCardDetailsResponseDto fetchCardDetailsResponseDto = new FetchCardDetailsResponseDto();
 		try{
-			System.out.println(fetchCardDetailsRequestDto.getAccountNumber());
+			logger.info("Account number: "+fetchCardDetailsRequestDto.getAccountNumber());
 			fetchCardDetailsResponseDto = cardService.fetchCardDetails(fetchCardDetailsRequestDto);
 
 		} catch (java.lang.Exception e) {
@@ -56,6 +64,13 @@ public class CardController {
 		}
 		return fetchCardDetailsResponseDto;
 	}
+	
+	//Method to fetch 10 records at a time
+		@GetMapping(value = "/fetch-cardholder-details")
+		public Page<CardHolderResponseDto> fetchCardHolderDetails(@RequestParam(defaultValue = "0") int page ) {
+			return cardService.fetchCardHolderDetails(page);
+
+		}
 	
 	//Update status of the card
 	@PutMapping(value = "/update-card-status")
