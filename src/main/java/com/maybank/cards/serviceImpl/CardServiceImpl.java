@@ -1,11 +1,18 @@
 package com.maybank.cards.serviceImpl;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.maybank.cards.dto.CardHolderResponseDto;
 import com.maybank.cards.dto.CreateCardRequestDto;
 import com.maybank.cards.dto.CreateCardResponseDto;
 import com.maybank.cards.dto.FetchCardDetailsRequestDto;
@@ -28,6 +35,8 @@ public class CardServiceImpl implements CardService{
 	Mapper mapper;
 	
 	private CardHolder cardHolder = new CardHolder();
+	
+	private static int PAGE_SIZE = 10; 
 	
 	//Create Card for a customer
 	@Override
@@ -80,6 +89,23 @@ public class CardServiceImpl implements CardService{
 					+ " status for Account Number "+requestDto.getAccountNumber()+".");
 		}
 		return updateCardStatusResponseDto;
+	}
+
+	@Override
+	public Page<CardHolderResponseDto> fetchCardHolderDetails(int page) {
+		Pageable pageable = PageRequest.of(
+                page,
+                PAGE_SIZE,
+                Sort.by("name").ascending());
+		Page<CardHolder> cardHolderList = cardRepository.findAll(pageable);
+		
+		List<CardHolderResponseDto> response = cardHolderList.stream().map(Mapper::toMapPageableRequest).toList();
+		
+		return new PageImpl(
+				response,
+				pageable,
+				cardHolderList.getTotalElements());
+				
 	}
 	
 
