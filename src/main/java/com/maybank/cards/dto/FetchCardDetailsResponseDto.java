@@ -10,6 +10,8 @@ public class FetchCardDetailsResponseDto {
     private LocalDate expiryDate;
 
     private String status;
+    
+    private String message;
 
     public String getStatus(){
 
@@ -44,4 +46,12 @@ public class FetchCardDetailsResponseDto {
     public void setAccountNumber(String accountNumber){
         this.accountNumber = accountNumber;
     }
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 }
