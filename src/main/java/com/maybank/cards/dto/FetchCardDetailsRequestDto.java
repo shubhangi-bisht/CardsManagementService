@@ -1,6 +1,5 @@
 package com.maybank.cards.dto;
 
-import java.time.LocalDate;
 
 public class FetchCardDetailsRequestDto {
 
