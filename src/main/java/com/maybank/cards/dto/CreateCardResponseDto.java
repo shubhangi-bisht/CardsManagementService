@@ -1,36 +1,15 @@
 package com.maybank.cards.dto;
 
 public class CreateCardResponseDto {
-    private String name;
 
     private String accountNumber;
+    private String message;
 
-    private LocalDate expiryDate;
-
-    private String status;
-
-    public String getStatus(){
-        return status;
+    public String getMessage(){
+        return message;
     }
-
-    public void setStatus(String status){
-        this.status = status;
-    }
-
-    public LocalDate getExpiryDate(){
-        return expiryDate;
-    }
-
-    public void setExpiryDate(LocalDate expiryDate){
-        this.expiryDate = expiryDate;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
+    public void setMessage(String message){
+        this.message = message;
     }
 
     public String getAccountNumber(){
