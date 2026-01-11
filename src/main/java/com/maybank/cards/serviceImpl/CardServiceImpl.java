@@ -175,7 +175,7 @@ public class CardServiceImpl implements CardService {
 			logger.info("response 1 DTO: {}", new ObjectMapper().writeValueAsString(transactions));
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Exception: "+e);
 		}
         CardDetailsWithTxnResDto response = new CardDetailsWithTxnResDto();
         response.setAccountNumber(MaskingUtil.maskAccountNumber(requestDto.getCardNumber()));
