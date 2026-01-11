@@ -24,8 +24,8 @@ public class WeatherController {
 	public ResponseEntity<String> getWeather(@RequestParam double lat,
 			@RequestParam double lon) {
 
-		String body = weatherService.fetchWeather(lat, lon)
-				.block();
+		String body = weatherService.fetchWeather(lat, lon);
+				//.block();
 
 		return ResponseEntity.ok()
 				.contentType(MediaType.APPLICATION_JSON)
