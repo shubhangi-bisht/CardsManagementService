@@ -13,7 +13,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.maybank.cards.dto.CardDetailsWithTxnResDto;
 import com.maybank.cards.dto.CardHolderResponseDto;
+import com.maybank.cards.dto.CardTransactionsResponseDto;
 import com.maybank.cards.dto.CreateCardRequestDto;
 import com.maybank.cards.dto.CreateCardResponseDto;
 import com.maybank.cards.dto.FetchCardDetailsRequestDto;
@@ -25,8 +29,11 @@ import com.maybank.cards.exception.DatabaseUnavailableException;
 import com.maybank.cards.exception.NoDataFoundException;
 import com.maybank.cards.repository.CardRepository;
 import com.maybank.cards.service.CardService;
+import com.maybank.cards.util.CardTransactionClient;
 import com.maybank.cards.util.Mapper;
 import com.maybank.cards.util.MaskingUtil;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -36,6 +43,9 @@ public class CardServiceImpl implements CardService {
 
     @Autowired
     private Mapper mapper;
+    
+    @Autowired
+    CardTransactionClient cardTransactionClient;
 
     private static final Logger logger = LogManager.getLogger(CardServiceImpl.class);
 
@@ -69,18 +79,18 @@ public class CardServiceImpl implements CardService {
     //****************** FETCH CARD DETAILS ********************//
     @Override
     public FetchCardDetailsResponseDto fetchCardDetails(FetchCardDetailsRequestDto requestDto) {
-        if (requestDto == null || requestDto.getAccountNumber() == null) {
+        if (requestDto == null || requestDto.getCardNumber() == null) {
             throw new IllegalArgumentException("Account number cannot be null");
         }
 
-        logger.info("Fetching card details for account number: {}", requestDto.getAccountNumber());
+        logger.info("Fetching card details for account number: {}", requestDto.getCardNumber());
 
         CardHolder cardHolder;
         try {
-            cardHolder = cardRepository.findById(requestDto.getAccountNumber())
+            cardHolder = cardRepository.findById(requestDto.getCardNumber())
                     .orElseThrow(() ->
                             new NoDataFoundException("No card found for account number "
-                                    + requestDto.getAccountNumber()));
+                                    + requestDto.getCardNumber()));
         } catch (NoDataFoundException ex) {
             throw ex; // Business exception
         } catch (Exception ex) {
@@ -151,6 +161,28 @@ public class CardServiceImpl implements CardService {
                 .toList();
 
         return new PageImpl<>(response, pageable, cardHolders.getTotalElements());
+    }
+    
+    
+    public CardDetailsWithTxnResDto getCardDetails(FetchCardDetailsRequestDto requestDto) {
+        FetchCardDetailsResponseDto cardDetails = fetchCardDetails(requestDto);
+
+        logger.info("cardDetails: "+cardDetails);
+        CardTransactionsResponseDto transactions = cardTransactionClient.fetchTransactions
+        		(requestDto);
+
+        try {
+			logger.info("response 1 DTO: {}", new ObjectMapper().writeValueAsString(transactions));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        CardDetailsWithTxnResDto response = new CardDetailsWithTxnResDto();
+        response.setAccountNumber(MaskingUtil.maskAccountNumber(requestDto.getCardNumber()));
+        response.setCardDetails(cardDetails);
+        response.setTransactions(transactions.getTransactions());
+
+        return response;
     }
 }
 
