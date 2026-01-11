@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maybank.cards.dto.CardDetailsWithTxnResDto;
 import com.maybank.cards.dto.CardHolderResponseDto;
 import com.maybank.cards.dto.CreateCardRequestDto;
 import com.maybank.cards.dto.CreateCardResponseDto;
@@ -51,7 +52,7 @@ public class CardController {
     public ResponseEntity<FetchCardDetailsResponseDto> fetchCardDetails(
             @RequestBody FetchCardDetailsRequestDto requestDto) {
 
-        logger.info("Fetch card details request received for account: {}", requestDto.getAccountNumber());
+        logger.info("Fetch card details request received for account: {}", requestDto.getCardNumber());
 
 
         // Service layer throws NoDataFoundException if not found
@@ -79,6 +80,14 @@ public class CardController {
 
         UpdateCardStatusResponseDto response = cardService.updateCardStatus(request);
         return ResponseEntity.ok(response);
+    }
+    
+    
+    @PostMapping("/transaction-details")
+    public ResponseEntity<CardDetailsWithTxnResDto> getTransactionDetails(
+    		@RequestBody FetchCardDetailsRequestDto requestDto) {
+    	logger.info("getTransactionDetails: {}", requestDto.getCardNumber());
+        return ResponseEntity.ok(cardService.getCardDetails(requestDto));
     }
 }
 
