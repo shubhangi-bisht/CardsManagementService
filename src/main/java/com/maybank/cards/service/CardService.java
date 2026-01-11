@@ -3,6 +3,7 @@ package com.maybank.cards.service;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.maybank.cards.dto.CardDetailsWithTxnResDto;
 import com.maybank.cards.dto.CardHolderResponseDto;
 import com.maybank.cards.dto.CreateCardRequestDto;
 import com.maybank.cards.dto.CreateCardResponseDto;
@@ -21,5 +22,7 @@ public interface CardService {
     public UpdateCardStatusResponseDto updateCardStatus(UpdateCardStatusRequestDto requestDto);
     
     public Page<CardHolderResponseDto> fetchCardHolderDetails(int page);
+    
+    public CardDetailsWithTxnResDto getCardDetails(FetchCardDetailsRequestDto requestDto);
 
 }
