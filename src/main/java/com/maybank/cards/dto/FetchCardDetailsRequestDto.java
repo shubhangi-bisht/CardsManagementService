@@ -3,13 +3,13 @@ package com.maybank.cards.dto;
 
 public class FetchCardDetailsRequestDto {
 
-    private String accountNumber;
+    private String cardNumber;
 
-    public String getAccountNumber(){
-        return accountNumber;
+    public String getCardNumber(){
+        return cardNumber;
     }
 
-    public void setAccountNumber(String accountNumber){
-        this.accountNumber = accountNumber;
+    public void setCardNumber(String cardNumber){
+        this.cardNumber = cardNumber;
     }
 }
