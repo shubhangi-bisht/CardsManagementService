@@ -16,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"accountNumber\":\"1234567890\"\n}",
+					"raw": "{\n    \"cardNumber\":\"1234567890\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,7 +48,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"status\": \"ACTIVE\",\n    \"accountNumber\": \"1234567890\"\n}",
+					"raw": "{\n    \"status\": \"ACTIVE\",\n    \"cardNumber\": \"1234567890\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -144,42 +144,6 @@
 			"response": []
 		},
 		{
-			"name": "TransactionService - Fetch Transaction List",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"cardNumber\":\"1234567890\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:6072/card/transactions/fetchTransactionList",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "6072",
-					"path": [
-						"card",
-						"transactions",
-						"fetchTransactionList"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Fetch Weather Details",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -218,6 +182,42 @@
 							"key": "lon",
 							"value": "13.41"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TransactionService - Fetch Transaction List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cardNumber\":\"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6072/card/transactions/fetchTransactionList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6072",
+					"path": [
+						"card",
+						"transactions",
+						"fetchTransactionList"
 					]
 				}
 			},
