@@ -7,27 +7,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CardTransactionsResponseDto {
 
-    private String accountNumber;
+    private String cardNumber;
     private int totalTransactions;
     
     @JsonProperty("transactions")
     private List<CardTransactionResponseDto> transactions;
 
 
-    public CardTransactionsResponseDto(String accountNumber, int totalTransactions,
+    public CardTransactionsResponseDto(String cardNumber, int totalTransactions,
                                        List<CardTransactionResponseDto> transactions) {
-        this.accountNumber = accountNumber;
+        this.cardNumber = cardNumber;
         this.totalTransactions = totalTransactions;
         this.transactions = transactions;
     }
 
     // Getters & Setters
-    public String getAccountNumber() {
-        return accountNumber;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public int getTotalTransactions() {
@@ -49,7 +49,7 @@ public class CardTransactionsResponseDto {
     @Override
     public String toString() {
         return "CardTransactionsResponseDto{" +
-                "accountNumber='" + accountNumber + '\'' +
+                "CardNumber='" + cardNumber + '\'' +
                 ", totalTransactions=" + totalTransactions +
                 ", transactions=" + transactions +
                 '}';
