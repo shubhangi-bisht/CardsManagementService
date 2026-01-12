@@ -16,8 +16,8 @@ public class CardHolder {
     private String name;
 
     @Id
-    @Column(name = "ACCOUNT_NUMBER")
-    private String accountNumber;
+    @Column(name = "CARD_NUMBER")
+    private String cardNumber;
 
     @Column(name = "EXPIRY_DATE")
     private LocalDate expiryDate;
@@ -49,12 +49,12 @@ public class CardHolder {
         this.name = name;
     }
 
-    public String getAccountNumber(){
-        return accountNumber;
+    public String getCardNumber(){
+        return cardNumber;
     }
 
-    public void setAccountNumber(String accountNumber){
-        this.accountNumber = accountNumber;
+    public void setCardNumber(String cardNumber){
+        this.cardNumber = cardNumber;
     }
 
 
