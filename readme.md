@@ -1,6 +1,6 @@
 # Cards Management Service
 
-A Spring Boot–based microservice responsible for managing card lifecycle operations such as card creation, status updates, and transaction retrieval. This service is designed with clean architecture principles, RESTful APIs, and enterprise-ready practices.
+A Spring Boot–based service responsible for managing card lifecycle operations such as card creation, status updates, and transaction retrieval. This service is designed with clean architecture principles, RESTful APIs, and enterprise-ready practices.
 
 # Features
 
@@ -8,7 +8,7 @@ A Spring Boot–based microservice responsible for managing card lifecycle opera
 * Fetch card details by card number
 * Update card status (e.g., ACTIVE, BLOCKED)
 * Pagination support for card listings
-* Retrieve recent card transactions (Calling another service with name TransactionService which I have created to test external API)
+* An external weather API (nested) is incorporated.
 * Centralized exception handling
 
 # Tech Stack
@@ -65,13 +65,15 @@ http://localhost:8081
 * Consistent error response structure
 
 # External API Integration & Testing
-A separate Spring Boot project named CardTransactionsService has been created to validate and test external API integrations.
-This project is used to simulate and verify communication with third-party services before integrating them into the core Cards Management Service.
 As part of this effort, an external Weather API has been incorporated to test:
 REST client integration
 Request/response handling
 Error scenarios and resilience
 This setup helps ensure reliable external API consumption and keeps the core service clean and decoupled.
+
+In addition to this :
+A separate Spring Boot project named CardTransactionsService has been created to validate and test external API integrations.
+This project is used to simulate and verify communication with third-party services before integrating them into the core Cards Management Service.
 
 # LOGGING
 
