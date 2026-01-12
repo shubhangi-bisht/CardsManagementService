@@ -2,7 +2,7 @@ package com.maybank.cards.dto;
 
 public class CreateCardResponseDto {
 
-    private String accountNumber;
+    private String cardNumber;
     private String message;
 
     public String getMessage(){
@@ -12,11 +12,11 @@ public class CreateCardResponseDto {
         this.message = message;
     }
 
-    public String getAccountNumber(){
-        return accountNumber;
+    public String getCardNumber(){
+        return cardNumber;
     }
 
-    public void setAccountNumber(String accountNumber){
-        this.accountNumber = accountNumber;
+    public void setCardNumber(String cardNumber){
+        this.cardNumber = cardNumber;
     }
 }
