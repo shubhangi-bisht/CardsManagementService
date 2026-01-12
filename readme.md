@@ -72,8 +72,9 @@ Error scenarios and resilience
 This setup helps ensure reliable external API consumption and keeps the core service clean and decoupled.
 
 In addition to this :
-A separate Spring Boot project named CardTransactionsService has been created to validate and test external API integrations.
+A separate custom Spring Boot project named CardTransactionsService has been created to validate and test external API integrations.
 This project is used to simulate and verify communication with third-party services before integrating them into the core Cards Management Service.
+https://github.com/shubhangi-bisht/CardsTransactionService.git
 
 # LOGGING
 
