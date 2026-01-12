@@ -4,7 +4,7 @@ public class UpdateCardStatusRequestDto
 {
     private String status;
     
-    private String accountNumber;
+    private String cardNumber;
 
     public String getStatus(){
         return status;
@@ -14,11 +14,11 @@ public class UpdateCardStatusRequestDto
         this.status = status;
     }
 
-	public String getAccountNumber() {
-		return accountNumber;
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 }
