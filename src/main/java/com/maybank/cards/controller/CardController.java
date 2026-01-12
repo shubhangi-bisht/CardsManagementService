@@ -40,7 +40,7 @@ public class CardController {
     public ResponseEntity<CreateCardResponseDto> createCard(
             @RequestBody CreateCardRequestDto request) {
 
-        logger.info("Create card request received for account: {}", request.getAccountNumber());
+        logger.info("Create card request received for account: {}", request.getCardNumber());
 
         // Service layer handles exceptions
         CreateCardResponseDto response = cardService.createCard(request);
@@ -76,7 +76,7 @@ public class CardController {
     public ResponseEntity<UpdateCardStatusResponseDto> updateCardStatus(
             @RequestBody UpdateCardStatusRequestDto request) {
 
-        logger.info("Update card status request received for account: {}", request.getAccountNumber());
+        logger.info("Update card status request received for account: {}", request.getCardNumber());
 
         UpdateCardStatusResponseDto response = cardService.updateCardStatus(request);
         return ResponseEntity.ok(response);
