@@ -13,7 +13,7 @@ public class Mapper {
 	
 	
 	public CardHolder toMap(CreateCardRequestDto createCardRequest) {
-		cardHolder.setAccountNumber(createCardRequest.getAccountNumber());
+		cardHolder.setCardNumber(createCardRequest.getCardNumber());
 		cardHolder.setName(createCardRequest.getName());
 		cardHolder.setStatus(createCardRequest.getStatus());
 		cardHolder.setExpiryDate(createCardRequest.getExpiryDate());
@@ -24,7 +24,7 @@ public class Mapper {
 	
 	public static CardHolderResponseDto toMapPageableRequest(CardHolder cardHolder) {
 		CardHolderResponseDto cardHolderResponseDto = new CardHolderResponseDto();
-		cardHolderResponseDto.setAccountNumber(cardHolder.getAccountNumber());
+		cardHolderResponseDto.setCardNumber(cardHolder.getCardNumber());
 		cardHolderResponseDto.setName(cardHolder.getName());
 		cardHolderResponseDto.setStatus(cardHolder.getStatus());
 		cardHolderResponseDto.setExpiryDate(cardHolder.getExpiryDate());
