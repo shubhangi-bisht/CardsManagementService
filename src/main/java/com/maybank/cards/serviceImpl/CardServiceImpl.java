@@ -55,11 +55,11 @@ public class CardServiceImpl implements CardService {
     @Override
     @Transactional
     public CreateCardResponseDto createCard(CreateCardRequestDto requestDto) {
-        if (requestDto == null || requestDto.getAccountNumber() == null) {
+        if (requestDto == null || requestDto.getCardNumber() == null) {
             throw new IllegalArgumentException("Request or Account number cannot be null");
         }
 
-        logger.info("Creating card for account number: {}", requestDto.getAccountNumber());
+        logger.info("Creating card for account number: {}", requestDto.getCardNumber());
 
         try {
             CardHolder card = mapper.toMap(requestDto);
@@ -70,7 +70,7 @@ public class CardServiceImpl implements CardService {
         }
 
         CreateCardResponseDto response = new CreateCardResponseDto();
-        response.setAccountNumber(requestDto.getAccountNumber());
+        response.setCardNumber(requestDto.getCardNumber());
         response.setMessage("Account created successfully");
 
         return response;
@@ -99,7 +99,7 @@ public class CardServiceImpl implements CardService {
         }
 
         FetchCardDetailsResponseDto response = new FetchCardDetailsResponseDto();
-        response.setAccountNumber(MaskingUtil.maskAccountNumber(cardHolder.getAccountNumber()));
+        response.setCardNumber(MaskingUtil.maskAccountNumber(cardHolder.getCardNumber()));
         response.setName(cardHolder.getName());
         response.setStatus(cardHolder.getStatus());
         response.setExpiryDate(cardHolder.getExpiryDate());
@@ -112,16 +112,16 @@ public class CardServiceImpl implements CardService {
     @Override
     @Transactional
     public UpdateCardStatusResponseDto updateCardStatus(UpdateCardStatusRequestDto requestDto) {
-        if (requestDto == null || requestDto.getAccountNumber() == null) {
+        if (requestDto == null || requestDto.getCardNumber() == null) {
             throw new IllegalArgumentException("Request or Account number cannot be null");
         }
 
-        logger.info("Updating card status for account number: {}", requestDto.getAccountNumber());
+        logger.info("Updating card status for account number: {}", requestDto.getCardNumber());
 
         int updatedRows;
         try {
             updatedRows = cardRepository.updateStatusByAccountNumber(
-                    requestDto.getAccountNumber(),
+                    requestDto.getCardNumber(),
                     requestDto.getStatus());
         } catch (Exception ex) {
             logger.error("Database error while updating card status", ex);
@@ -133,7 +133,7 @@ public class CardServiceImpl implements CardService {
             response.setMessage("Card status updated successfully.");
         } else {
             throw new NoDataFoundException("No card found for account number "
-                    + requestDto.getAccountNumber() + ". Status update failed.");
+                    + requestDto.getCardNumber() + ". Status update failed.");
         }
 
         return response;
