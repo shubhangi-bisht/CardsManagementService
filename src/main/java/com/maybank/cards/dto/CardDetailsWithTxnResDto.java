@@ -3,18 +3,18 @@ package com.maybank.cards.dto;
 import java.util.List;
 
 public class CardDetailsWithTxnResDto {
-	private String accountNumber;
+	private String cardNumber;
     
 	private FetchCardDetailsResponseDto cardDetails;
    
 	private List<CardTransactionResponseDto> transactions;
 	
     public String getAccountNumber() {
-		return accountNumber;
+		return cardNumber;
 	}
     
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
+	public void setAccountNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 	
 	public FetchCardDetailsResponseDto getCardDetails() {
