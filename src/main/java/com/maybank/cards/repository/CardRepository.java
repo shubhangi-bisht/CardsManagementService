@@ -13,7 +13,7 @@ public interface CardRepository extends JpaRepository<CardHolder, String>{
 
 	@Modifying
 	@Transactional
-	@Query("UPDATE CardHolder c SET c.status = :status WHERE c.accountNumber = :accountNumber")
+	@Query("UPDATE CardHolder c SET c.status = :status WHERE c.cardNumber = :accountNumber")
 	int updateStatusByAccountNumber(String accountNumber, String status);
 
 }
